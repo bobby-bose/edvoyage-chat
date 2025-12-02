@@ -1,0 +1,77 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Chat</title>
+  <style>
+    #textInput {
+    width: 100%;
+    height: 42px;
+    background: #f0f2f5;
+    border: 2px solid #0c906d;
+    border-radius: 20px;
+    padding: 0 16px;
+    font-size: 15px;
+    outline: none;
+    transition: border 0.2s ease;
+}
+
+#textInput::placeholder {
+    color: #65676b;
+    font-weight: 500;
+}
+
+#textInput:focus {
+    border: 2px solid #1877f2;
+    background: #ffffff;
+}
+.logo{
+    height:10%;
+    width:80%;
+   align-items: center;
+   
+}
+.header-top {
+    display: flex;
+    align-items: center;
+    gap: 35%;
+    width:100%;
+  }
+  header{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    gap:10px;
+  }
+  </style>
+  <link rel="stylesheet" href="{% static 'chat.css' %}">
+</head>
+<body>
+  <div class="chat-container">
+    <header class="chat-header">
+    
+        <!-- i need an icon with back button icon -->
+       
+         <img src="{% static 'logo.svg' %}" class="logo" width="80%">
+     
+
+       <div class="header-top">
+      
+      <div class="chat-title"> <span id="otherDisplay"></span></div>
+     </div>
+    
+    </header>
+
+    <div id="messageBox" class="message-box"></div>
+    <div class="composer">
+      <input id="textInput" placeholder="Type a message">
+      <input type="file" id="imageInput" accept="image/*" style="display:none">
+      <button id="attachBtn">📎</button>
+      <button id="sendBtn">Send</button>
+    </div>
+  </div>
+  <script src="{% static 'chat.js' %}"></script>
+</body>
+</html>
