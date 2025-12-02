@@ -98,13 +98,11 @@ def messages_get(request):
         msgs.sort(key=lambda mm: mm.timestamp)
 
         results = []
-        # Update delivered/seen where sender != current
+        # Update seen status for messages sent to current user
         for m in msgs:
-            if m.sender != current:
-                if not m.delivered or not m.seen:
-                    m.delivered = True
-                    m.seen = True
-                    m.save(update_fields=['delivered', 'seen'])
+            if m.sender != current and not m.seen:
+                m.seen = True
+                m.save(update_fields=['seen'])
 
             image_url = ''
             if m.image:
@@ -145,7 +143,7 @@ def send_message(request):
 
         conv, _ = Conversation.objects.get_or_create(user_a=sender, user_b=recipient)
 
-        msg = Message(conversation=conv, sender=sender, text=text)
+        msg = Message(conversation=conv, sender=sender, text=text, delivered=True)
         if image:
             msg.image = image
         msg.save()

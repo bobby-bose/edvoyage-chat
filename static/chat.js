@@ -47,7 +47,8 @@ document.getElementById('sendBtn').addEventListener('click', async ()=>{
   const text = document.getElementById('textInput').value;
   const input = document.getElementById('imageInput');
   const fd = new FormData();
-  // do not send from_email; server will use STATIC_CURRENT_USER_EMAIL when missing
+  // Send current user email from URL param
+  if(currentEmail) fd.append('from_email', currentEmail);
   fd.append('to_email', otherEmail);
   if(text) fd.append('text', text);
   if(input.files[0]) fd.append('image', input.files[0]);
